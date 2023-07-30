@@ -4,7 +4,7 @@ import torch
 from diffusers import StableDiffusionInpaintPipeline
 from PIL import Image
 from segment_anything import SamPredictor, sam_model_registry
-
+import matplotlib.pyplot as plt
 
 device = "cuda"
 sam_checkpoint = "./sam_vit_b_01ec64.pth"
@@ -58,6 +58,8 @@ with gr.Blocks() as demo:
         # (n, sz, sz)
         mask = Image.fromarray(mask[0, :, :])
         
+        mask.save("./mask.png")
+
         return mask
 
 
