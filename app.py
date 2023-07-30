@@ -84,4 +84,4 @@ with gr.Blocks() as demo:
 
 
     if __name__ == "__main__":
-        demo.launch()
+        demo.launch(share=True)
