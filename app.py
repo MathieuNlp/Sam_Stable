@@ -5,11 +5,11 @@ from diffusers import StableDiffusionInpaintPipeline
 from PIL import Image
 from segment_anything import SamPredictor, sam_model_registry
 import matplotlib.pyplot as plt
+import requests
 
 device = "cuda"
 sam_checkpoint = "./sam_vit_b_01ec64.pth"
 model_type = "vit_b"
-
 # SAM model
 sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
 predictor = SamPredictor(sam)
@@ -23,8 +23,8 @@ pipe = StableDiffusionInpaintPipeline.from_pretrained(
 # Acceleration and reduction memory techniques
 
 pipe = pipe.to(device)
-pipe.enable_sequential_cpu_offload()
-pipe.enable_attention_slicing(1)
+#pipe.enable_sequential_cpu_offload()
+pipe.enable_attention_slicing()
 #pipe.enable_vae_slicing()
 #pipe.enable_vae_tiling()
 pipe.enable_xformers_memory_efficient_attention()
@@ -74,7 +74,7 @@ with gr.Blocks() as demo:
                       mask_image=mask).images[0]
         
         output.save("./output.png")
-        
+
         return output
 
     input_img.select(generate_mask, 
