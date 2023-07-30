@@ -74,6 +74,7 @@ with gr.Blocks() as demo:
                       image=image, 
                       mask_image=mask).images[0]
         
+        output.save("./output.png")
         return output
 
     input_img.select(generate_mask, 
