@@ -1,13 +1,13 @@
 import gradio as gr
 import numpy as np
 import torch
-from diffusers import StableDiffusionPipeline
+from diffusers import StableDiffusionInpaintPipeline
 from PIL import Image
 from segment_anything import SamPredictor, sam_model_registry
 
 
 device = "cuda"
-sam_checkpoint = "sam_vit_b_01ec64.pth"
+sam_checkpoint = "../sam_vit_b_01ec64.pth"
 model_type = "vit_b"
 
 # SAM model
@@ -15,7 +15,7 @@ sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
 predictor = SamPredictor(sam)
 
 # SD model
-pipe = StableDiffusionPipeline.from_pretrained(
+pipe = StableDiffusionInpaintPipeline.from_pretrained(
 "runwayml/stable-diffusion-inpainting",
     torch_dtype=torch.float16,
 )
@@ -25,8 +25,8 @@ pipe = StableDiffusionPipeline.from_pretrained(
 pipe = pipe.to(device)
 pipe.enable_sequential_cpu_offload()
 pipe.enable_attention_slicing(1)
-pipe.enable_vae_slicing()
-pipe.enable_vae_tiling()
+#pipe.enable_vae_slicing()
+#pipe.enable_vae_tiling()
 pipe.enable_xformers_memory_efficient_attention()
 
 selected_pixels = []
@@ -47,7 +47,7 @@ with gr.Blocks() as demo:
     def generate_mask(image, evt: gr.SelectData):
         selected_pixels.append(evt.index)
 
-        predictor.set(image)
+        predictor.set_image(image)
         input_points = np.array(selected_pixels)
         input_labels = np.ones(input_points.shape[0])
         mask, _, _ = predictor.predict(
