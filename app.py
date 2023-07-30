@@ -7,7 +7,7 @@ from segment_anything import SamPredictor, sam_model_registry
 
 
 device = "cuda"
-sam_checkpoint = "../sam_vit_b_01ec64.pth"
+sam_checkpoint = "./sam_vit_b_01ec64.pth"
 model_type = "vit_b"
 
 # SAM model
