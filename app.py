@@ -57,7 +57,6 @@ with gr.Blocks() as demo:
         )
         # (n, sz, sz)
         mask = Image.fromarray(mask[0, :, :])
-        
         mask.save("./mask.png")
 
         return mask
@@ -75,6 +74,7 @@ with gr.Blocks() as demo:
                       mask_image=mask).images[0]
         
         output.save("./output.png")
+        
         return output
 
     input_img.select(generate_mask, 
