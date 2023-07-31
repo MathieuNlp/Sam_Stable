@@ -33,10 +33,8 @@ pipe.enable_attention_slicing()
 #pipe.enable_vae_tiling()
 pipe.enable_xformers_memory_efficient_attention()
 
-selected_points = []
-masks = []
 with gr.Blocks() as demo:
-
+    
     with gr.Row():
         gr.Markdown(
             '''# Stable SAM : Combinaison of Stable diffusion v1.5 and Segment Anything model for doing inpainting.
@@ -54,6 +52,9 @@ with gr.Blocks() as demo:
 
     with gr.Row():
         with gr.Tab(label="Segmentation"):
+            selected_points = gr.State([])
+            masks = gr.State([])
+
             with gr.Row().style(equal_height=True):
                 radio_point = gr.Radio(["Foreground", "Background"], label="Point label")
                 radio_mask = gr.Radio(["Mask_1", "Mask_2", "Mask_3"], label="Mask selection")
@@ -112,9 +113,8 @@ with gr.Blocks() as demo:
 
     def generate_mask(image, selected_points, radio_mask):
         predictor.set_image(image)
-        input_prior = np.array(selected_points)
-        input_points = np.array(input_prior[:,0])
-        input_labels = np.array(input_prior[:,1])
+        input_points = np.array(selected_points)[:,0]
+        input_labels = np.array(selected_points)[:,1]
         masks, _, _ = predictor.predict(
             point_coords=input_points,
             point_labels=input_labels,
@@ -177,7 +177,7 @@ with gr.Blocks() as demo:
         outputs=[mask_img, masks]
     )
     
-    radio_point.input(
+    radio_mask.input(
         plot_new_mask,
         inputs=[radio_mask, masks],
         outputs=[mask_img]
