@@ -52,19 +52,21 @@ with gr.Blocks() as demo:
         input_img = gr.Image(label="Input Image")
         mask_img = gr.Image(label="Mask")
         output_img = gr.Image(label="Output Image")
+
+    with gr.Row():
+        with gr.Tab(label="Segmentation"):
+            with gr.Row().style(equal_height=True):
+                radio_point = gr.Radio(["Foreground", "Background"], label="Point label")
+                radio_mask = gr.Radio(["Mask_1, Mask_2, Mask_3"], label="Mask selection")
+                undo_points_button = gr.Button("Undo point")
+                segment_button = gr.Button("Generate mask")
+                
+    with gr.Row():
+        with gr.Tab(label="Diffusion"):
+            with gr.Row().style(equal_height=True):
+                prompt_text = gr.Textbox(lines=1, label="Prompt")
+                diffusion_button = gr.Button("Run diffusion")
         
-    with gr.Tab(label="Segmentation"):
-        with gr.Row().style(equal_height=True):
-            radio_point = gr.Radio(["Foreground", "Background"], label="Point label")
-            radio_mask = gr.Radio(["Mask_1, Mask_2, Mask_3"], label="Mask selection")
-            undo_points_button = gr.Button("Undo point")
-            segment_button = gr.Button("Generate mask")
-            
-    with gr.Tab(label="Diffusion"):
-        with gr.Row().style(equal_height=True):
-            prompt_text = gr.Textbox(lines=1, label="Prompt")
-            diffusion_button = gr.Button("Run diffusion")
-    
 
     def store_original_image(image):
         return image, [] # reset the selected_points
