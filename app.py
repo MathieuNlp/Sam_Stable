@@ -116,7 +116,7 @@ with gr.Blocks() as demo:
         prompts = np.array(selected_points, dtype=object)
         input_points = prompts[:,0]
         input_labels = prompts[:,1]
-        print(prompts[0])
+        print(prompts[0][0][0])
         print(input_points)
         print(input_labels)
         masks, _, _ = predictor.predict(
