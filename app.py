@@ -76,13 +76,13 @@ with gr.Blocks() as demo:
     def point_selection(image, selected_points, point_type, evt: gr.SelectData):
         # get points
         if point_type == "Foreground":
-            selected_points.append([evt.index, 1])
+            selected_points.append((evt.index, 1))
 
         elif point_type == "Background":
-            selected_points.append([evt.index, 0])
+            selected_points.append((evt.index, 0))
 
         else:
-            selected_points.append([evt.index, 1])
+            selected_points.append((evt.index, 1))
         #draw points
         for point, label in selected_points:
             cv2.drawMarker(image, point, colors[label], markerType=markers[label], markerSize=20, thickness=5)
