@@ -194,7 +194,7 @@ with gr.Blocks() as demo:
 
     diffusion_button.click(
         inpaint, 
-        inputs=[input_img, mask_img, prompt_text], 
+        inputs=[original_img, mask_img, prompt_text], 
         outputs=[output_img]
     )
 
