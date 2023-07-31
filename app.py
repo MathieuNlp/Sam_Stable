@@ -33,7 +33,8 @@ pipe.enable_attention_slicing()
 #pipe.enable_vae_tiling()
 pipe.enable_xformers_memory_efficient_attention()
 
-
+selected_points = []
+masks = []
 with gr.Blocks() as demo:
 
     with gr.Row():
@@ -46,8 +47,6 @@ with gr.Blocks() as demo:
 
     with gr.Row():
         original_img = gr.State(value=None)
-        selected_points = gr.State([]) 
-        masks = gr.State([])
 
         input_img = gr.Image(label="Input Image")
         mask_img = gr.Image(label="Mask")
@@ -189,8 +188,6 @@ with gr.Blocks() as demo:
         inputs=[input_img, mask_img, prompt_text], 
         outputs=[output_img]
     )
-    
-
 
     if __name__ == "__main__":
         demo.launch(share=True)
