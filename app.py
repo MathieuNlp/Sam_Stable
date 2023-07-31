@@ -141,7 +141,7 @@ with gr.Blocks() as demo:
 
     def inpaint(image, mask, prompt):
         image = Image.fromarray(image)
-        #mask = Image.fromarray(mask)
+        mask = Image.fromarray(mask)
 
         image = image.resize((512, 512))
         mask = mask.resize((512, 512))
