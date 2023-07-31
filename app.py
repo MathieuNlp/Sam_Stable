@@ -56,8 +56,8 @@ with gr.Blocks() as demo:
             masks = gr.State([])
 
             with gr.Row().style(equal_height=True):
-                radio_point = gr.Radio(["Foreground", "Background"], label="Point label")
-                radio_mask = gr.Radio(["Mask_1", "Mask_2", "Mask_3"], label="Mask selection")
+                radio_point = gr.Radio(["Foreground", "Background"], label="Point label", value="Foreground")
+                radio_mask = gr.Radio(["Mask_1", "Mask_2", "Mask_3"], label="Mask selection", value="Mask_1")
                 undo_points_button = gr.Button("Undo point")
                 reset_points_button = gr.Button("Reset points")
                 segment_button = gr.Button("Generate mask")
@@ -113,8 +113,8 @@ with gr.Blocks() as demo:
 
     def generate_mask(image, selected_points, radio_mask):
         predictor.set_image(image)
-        input_points = np.array(selected_points)[:,0]
-        input_labels = np.array(selected_points)[:,1]
+        input_points = np.array(selected_points, dtype=object)[:,0]
+        input_labels = np.array(selected_points, dtype=object)[:,1]
         masks, _, _ = predictor.predict(
             point_coords=input_points,
             point_labels=input_labels,
