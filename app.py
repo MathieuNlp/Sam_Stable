@@ -122,8 +122,6 @@ with gr.Blocks() as demo:
         predictor.set_image(image)
         input_points = np.array(points)
         input_labels = np.array(labels)
-        print(input_points)
-        print(input_labels)
         masks, _, _ = predictor.predict(
             point_coords=input_points,
             point_labels=input_labels,
