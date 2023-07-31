@@ -129,19 +129,19 @@ with gr.Blocks() as demo:
         )
         # (n, sz, sz)
         mask_to_idx = {"Mask_1":0, "Mask_2":1, "Mask_3":2}
-        chosen_mask = masks[mask_to_idx[radio_mask],:,:]
+        chosen_mask = Image.fromarray(masks[mask_to_idx[radio_mask], :, :])
 
         return chosen_mask, masks
 
     def plot_new_mask(selected_mask, masks):
         mask_to_idx = {"Mask_1":0, "Mask_2":1, "Mask_3":2}
-        chosen_mask = masks[mask_to_idx[selected_mask],:,:]
+        chosen_mask = Image.fromarray(masks[mask_to_idx[selected_mask], :, :])
 
         return chosen_mask
 
     def inpaint(image, mask, prompt):
         image = Image.fromarray(image)
-        mask = Image.fromarray(mask)
+        #mask = Image.fromarray(mask)
 
         image = image.resize((512, 512))
         mask = mask.resize((512, 512))
