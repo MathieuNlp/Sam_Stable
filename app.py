@@ -76,13 +76,13 @@ with gr.Blocks() as demo:
     def point_selection(image, selected_points, point_type, evt: gr.SelectData):
         # get points
         if point_type == "Foreground":
-            selected_points.append((evt.index, 1))
+            selected_points.append([evt.index, 1])
 
         elif point_type == "Background":
-            selected_points.append((evt.index, 0))
+            selected_points.append([evt.index, 0])
 
         else:
-            selected_points.append((evt.index, 1))
+            selected_points.append([evt.index, 1])
         #draw points
         for point, label in selected_points:
             cv2.drawMarker(image, point, colors[label], markerType=markers[label], markerSize=20, thickness=5)
@@ -113,8 +113,9 @@ with gr.Blocks() as demo:
 
     def generate_mask(image, selected_points, radio_mask):
         predictor.set_image(image)
-        input_points = np.array(selected_points, dtype=object)[:,0]
-        input_labels = np.array(selected_points, dtype=object)[:,1]
+        input_points = np.array(selected_points[:,0], dtype=object)
+        input_labels = np.array(selected_points[:,1], dtype=int)
+        print(selected_points)
         masks, _, _ = predictor.predict(
             point_coords=input_points,
             point_labels=input_labels,
