@@ -113,10 +113,10 @@ with gr.Blocks() as demo:
 
     def generate_mask(image, selected_points, radio_mask):
         predictor.set_image(image)
-        prompts = np.array(selected_points)
+        prompts = np.array(selected_points, dtype=object)
         input_points = prompts[:,0]
         input_labels = prompts[:,1]
-        print(prompts)
+        print(prompts[0])
         print(input_points)
         print(input_labels)
         masks, _, _ = predictor.predict(
