@@ -57,10 +57,11 @@ with gr.Blocks() as demo:
         with gr.Tab(label="Segmentation"):
             with gr.Row().style(equal_height=True):
                 radio_point = gr.Radio(["Foreground", "Background"], label="Point label")
-                radio_mask = gr.Radio(["Mask_1, Mask_2, Mask_3"], label="Mask selection")
+                radio_mask = gr.Radio(["Mask_1", "Mask_2", "Mask_3"], label="Mask selection")
                 undo_points_button = gr.Button("Undo point")
+                reset_points_button = gr.Button("Reset points")
                 segment_button = gr.Button("Generate mask")
-                
+
     with gr.Row():
         with gr.Tab(label="Diffusion"):
             with gr.Row().style(equal_height=True):
@@ -105,11 +106,16 @@ with gr.Blocks() as demo:
         return Image.fromarray(temp) 
 
 
-    def generate_mask(image, selected_points, radio_mask):
+    def reset_points(original_image):
 
+        return original_image, []
+
+
+    def generate_mask(image, selected_points, radio_mask):
         predictor.set_image(image)
-        input_points = np.array(selected_points[:,0])
-        input_labels = np.array(selected_points[:,1])
+        input_prior = np.array(selected_points)
+        input_points = np.array(input_prior[:,0])
+        input_labels = np.array(input_prior[:,1])
         masks, _, _ = predictor.predict(
             point_coords=input_points,
             point_labels=input_labels,
@@ -160,9 +166,15 @@ with gr.Blocks() as demo:
         outputs=[input_img]
     )
 
+    reset_points_button.click(
+        reset_points,
+        inputs=[original_img],
+        outputs=[input_img, selected_points]
+    )
+
     segment_button.click(
         generate_mask, 
-        inputs=[input_img], 
+        inputs=[input_img, selected_points, radio_mask], 
         outputs=[mask_img, masks]
     )
     
@@ -171,7 +183,6 @@ with gr.Blocks() as demo:
         inputs=[radio_mask, masks],
         outputs=[mask_img]
     )
-
 
     diffusion_button.click(
         inpaint, 
