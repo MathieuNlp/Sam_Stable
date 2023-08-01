@@ -5,6 +5,14 @@ Project that uses stable diffusion inpainting and segment anything model with gr
 - Segment Anything: https://github.com/facebookresearch/segment-anything
 
 Some features like mask 2 and 3 selection needs to be added but overall the build is working.
+
+# Run
+To run the project launch:
+''sh
+   sam_sd_gradio.ipynb
+''
+This can be used on the free gpu on colab.
+
 # Sources
 Thank you to:
 - Abhishek Takhur: https://www.youtube.com/watch?v=CERvlvUvVEI
