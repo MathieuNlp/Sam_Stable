@@ -11,6 +11,7 @@ To run the project launch:
 `sh
    sam_sd_gradio.ipynb
 `
+
 This can be used on the free gpu on colab.
 
 # Sources
