@@ -8,7 +8,7 @@ Some features like mask 2 and 3 selection needs to be added but overall the buil
 
 # Run
 To run the project launch:
-`sh
+`
    sam_sd_gradio.ipynb
 `
 
