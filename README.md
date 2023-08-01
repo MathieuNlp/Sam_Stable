@@ -1,7 +1,9 @@
 # Sam_Stable
 
 Project that uses stable diffusion inpainting and segment anything model with gradio.
+
 Stable diffusion: https://huggingface.co/runwayml/stable-diffusion-inpainting
+
 Segment Anything: https://github.com/facebookresearch/segment-anything
 
 # Sources
