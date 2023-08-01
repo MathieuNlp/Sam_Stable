@@ -1,6 +1,6 @@
 # Sam_Stable
 
-Project that uses stable diffusion inpainting and segment anything model with gradio.
+Project that uses stable diffusion inpainting and segment anything model with gradio (need a gpu)
 - Stable diffusion: https://huggingface.co/runwayml/stable-diffusion-inpainting
 - Segment Anything: https://github.com/facebookresearch/segment-anything
 
