@@ -17,7 +17,6 @@ model_type = "vit_b"
 # SAM model
 sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
 predictor = SamPredictor(sam)
-predictor.to(device)
 
 # SD model
 pipe = StableDiffusionInpaintPipeline.from_pretrained(
