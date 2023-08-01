@@ -1,4 +1,5 @@
 # Sam_Stable
+![alt text](![image](https://github.com/MathieuNlp/Sam_Stable/assets/78492189/ad702fdb-b261-4876-90fc-33ea907ed508))
 
 Project that uses stable diffusion inpainting and segment anything model with gradio (need a gpu)
 - Stable diffusion: https://huggingface.co/runwayml/stable-diffusion-inpainting
