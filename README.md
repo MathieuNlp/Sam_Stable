@@ -8,9 +8,9 @@ Some features like mask 2 and 3 selection needs to be added but overall the buil
 
 # Run
 To run the project launch:
-```sh
+`sh
    sam_sd_gradio.ipynb
-```
+`
 This can be used on the free gpu on colab.
 
 # Sources
