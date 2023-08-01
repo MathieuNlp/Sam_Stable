@@ -4,6 +4,7 @@ Project that uses stable diffusion inpainting and segment anything model with gr
 - Stable diffusion: https://huggingface.co/runwayml/stable-diffusion-inpainting
 - Segment Anything: https://github.com/facebookresearch/segment-anything
 
+Some features like mask 2 and 3 selection needs to be added but overall the build is working.
 # Sources
 Thank you to:
 - Abhishek Takhur: https://www.youtube.com/watch?v=CERvlvUvVEI
