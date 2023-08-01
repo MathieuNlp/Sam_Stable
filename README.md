@@ -1,5 +1,5 @@
 # Sam_Stable
-![alt text](![image](https://raw.githubusercontent.com/MathieuNlp/Sam_Stable/main/webui_screen.jpg))
+![image](https://raw.githubusercontent.com/MathieuNlp/Sam_Stable/main/webui_screen.jpg)
 
 Project that uses stable diffusion inpainting and segment anything model with gradio (need a gpu)
 - Stable diffusion: https://huggingface.co/runwayml/stable-diffusion-inpainting
